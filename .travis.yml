@@ -1,0 +1,29 @@
+language: python
+python:
+  - "3.6"
+  # - "3.7"
+  # - "3.8"
+  # - "3.9"
+env:
+  global:
+    - secure: ZLCX2DyxeyrfWfo0leRNtph8jHhkhQGQvHtTGKqtLbRbASkTrC4KJ8qKiNgW5XYPw86oMq5q3WnVKJhsZj18fe2fD+b4z4Yp4lPTnbcDyjWZLd7/LBHh9ba+8NaHfTYXtvXkyM8dnwc4B93HqxnZ+gElrvLryD4eRiyKNfTyUTjHef7f9Xf86B4/NuDVG7iufClfhq2pq8BYjLwufbrmPT3WeETWqTxF7BwE0WlMJjzpxDtgz8OzSFf48lCqo9a5IpX+iBjY2heOTERloV37rvImaXa7O++bWeO+u/cGaKwNG1sbPsS7QvHH9M9yHeGFxNYcMTDCcCBEqyulopfnxsGQzS774tGEmzDH92TmBvjuGmYaPt1vK2mFuYrvct7GtF6X8GGjn4HYZ0Wdh9nLT48QVS6KoJrMN0cmnClKrD4vFe+KMCJ9tVRf1JiX+8sFkguEjdcMfKu9PHsDKcdY8JQh+8Nw+PL3SS+yM9dKcjpXIBB2kYUaWZKh+/SfTC9xyucHX2FBtDbPp5Y8XoU1SMK1KyGtIGt42cxRZsvYYTAyibqVZJGRXw445rleBXRWKVOpl2R8XIB9zVN3GsNqfLYRWoZnB3gSG4YfIC/zfnO2tAIh+gi5xvhEGwQ0zXA9piUZqZKaGMa2nHBmaIPsrgZOYf4LtvtNAOND5K+E3u0=
+    - secure: 0kHGuUhaDJ53VoCvvGg4+HKp0wEjQzdvD9176MDB8vleePmTvXeda8dwn0ebs2NfJZ5H9bci6ibKdFzCIHc8giRmtItczyBUx7Gl6nfJqJbjRs6tKEhojRvO7K+7fOrr3xFFH2y3yqshssg030Xd7FWRczjFnQZM8MnmmVpGNcOqThL7twr8ZZEn2Mn8hb0wT3m4XH8YNm14xvAjywxfuzWiYZBV1z2ZaP1zKIqY0K+q4SqIz5MySSWKd3mcL/5FhKvSUTSP4BMyBsJcjZ+VpgjJHPwRlU99GEKUzNOXhY1fN7lxdeMSLSeZODhKlVf1+s2/Mwm5uQsB7TPDYOy4d9/4fVDeX8ucVZpnUkDFAvurExR/cXVcjITQ+NHEhFo+IWXzsd45z7ykodURnRODw3mjLtUNSFfJZc7CddksbhPY9vkeLL1tpVpkn47I7vOLdNPegj84e3E5KNZeCIXHcacD254LQMFUpaMOzR+jVkT+MU6/rTv3vsLoIQEmxwhotB/d9+gncicsvqVTXpHMUyU823rx8lI1x7pGVoOa1QFI9R5F7ulRdb/dXTDVohvJbD7VJcnRBG5TvY7wpUIsnj9ZeGdfv7gVHIr2bE67cfKIh3XRZ0IEuRPuEupumTEKr1cT6yTrnpzpQcYLAmu77y0iIYnmzSqmO36Nlydu1Og=
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install .
+  - pip install -r requirements_dev.txt
+
+script:
+  - pylint flowdock/
+  - pytest
+
+after_sucess:
+  - make -C ./docs/ build
+  - deploy:
+    - provider: pages
+      verbose: true
+      token: $github_token
+      edge: true
+      local_dir: ./docs/_build
+      keep_history: true
