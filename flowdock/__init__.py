@@ -7,7 +7,7 @@ __version__ = '0.1.0'
 from flowdock import api
 from flowdock.api.flow import Flow
 from flowdock.api.org import Org
-from flowdock.api.private import Private
+from flowdock.api.private import PrivateConv, PrivateMsg
 from flowdock.api.messages import Messages
 from flowdock.api.user import User
 

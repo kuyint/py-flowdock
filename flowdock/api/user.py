@@ -46,7 +46,7 @@ class User():
         qdata.update({'api':qdata['api'].format(id=user_id)})
         return self.ApiClient.client(qdata)
 
-    def delete_user(self, user_id):
+    def remove_users(self, user_id):
         """
         Parameters:
         user_id (int): flowdock user id
@@ -54,7 +54,7 @@ class User():
         To remove a user from an organization,\
             you will need to have administrator rights to the organization.
         """
-        qdata = self.Configuration.user.get('delete_users')
+        qdata = self.Configuration.user.get('remove_users_org')
         qdata.update({'api':qdata['api'].format(id=user_id)})
         return self.ApiClient.client(qdata)
 

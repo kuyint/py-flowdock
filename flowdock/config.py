@@ -67,7 +67,7 @@ class FlowdockConfig():
         'method' : 'GET',
         'api': '/organizations/' + self.org + '/users'
         },
-        'delete_users': {
+        'remove_users_org': {
         'method' : 'DELETE',
         'api': '/organizations/' + self.org + '/users/{id}'
         },
@@ -85,7 +85,7 @@ class FlowdockConfig():
         }
 
     @property
-    def private(self):
+    def private_conversations(self):
         """
         dict of private api's
         """
@@ -110,6 +110,10 @@ class FlowdockConfig():
                 'method': 'GET',
                 'api': '/organizations'
             },
+            'get_org_name': {
+                'method': 'GET',
+                'api': '/organizations/{org}'
+            },
             'find_org' : {
                 'method': 'GET',
                 'api': '/organizations/find?id={id}'
@@ -122,4 +126,24 @@ class FlowdockConfig():
                 }
             }
         }
-          
+
+    @property
+    def private_msg(self):
+        return {
+            'get_msgs' : {
+                'method': 'GET',
+                'api': '/private/{user_id}/messages'
+            },
+            'post_msg' : {
+                'method': 'POST',
+                'api': '/private/{user_id}/messages'
+            },
+            'get_msg' : {
+                'method': 'GET',
+                'api': '/private/{user_id}/messages/{id}',
+                'payload': {
+                            "event": "message",
+                            "content": None
+                            }
+            },
+        }

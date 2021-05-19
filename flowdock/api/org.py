@@ -17,7 +17,7 @@ class Org():
         """
         return self.ApiClient.client(self.Configuration.organizations.get('list_org'))
 
-    def get_org(self, org_id):
+    def get_org(self, name=None, org_id=None):
         """
         Parameters:
         org_id (int): flowdock org id.
@@ -25,6 +25,33 @@ class Org():
         Get information about an organization using the parameterized name.
         The authenticated user must belong to the organization.
         """
-        qdata = self.Configuration.organizations.get('find_org')
-        qdata.update({'api':qdata['api'].format(id=org_id)})
-        return self.ApiClient.client(qdata)
+        resp = {}
+        if org_id:
+            qdata = self.Configuration.organizations.get('find_org')
+            qdata.update({'api':qdata['api'].format(id=org_id)})
+            resp self.ApiClient.client(qdata)
+        else:
+            qdata = self.Configuration.flow.get('get_org_name')
+            qdata.update({'api':qdata['api'].format(org=name)})
+            resp = self.ApiClient.client(qdata)
+        return resp
+
+    def get_flow(self, name=None, org_id=None):
+        """
+        Parameters:
+        name (str):  parameterized_name of the org
+        org_id (int): flowdock org id
+
+        Get a single flow.
+        Single flow information always includes the flow’s user list.
+        """
+        resp = {}
+        if org_id:
+            qdata = self.Configuration.organizations.get('find_org')
+            qdata.update({'api':qdata['api'].format(id=org_id)})
+            resp = self.ApiClient.client(qdata)
+        else:
+            qdata = self.Configuration.flow.get('get_org_name')
+            qdata.update({'api':qdata['api'].format(org=name)})
+            resp = self.ApiClient.client(qdata)
+        return resp
