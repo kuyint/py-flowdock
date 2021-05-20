@@ -85,7 +85,7 @@ class Flow():
         qdata.update({'api':qdata['api'].format(flow=name)})
         return self.ApiClient.client(qdata)
     
-    def flow_access_mode(self, name, access_mode):
+    def access_mode(self, name, access_mode):
         """
         Parameters:
         name (str):  parameterized_name of the flow

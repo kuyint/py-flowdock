@@ -16,6 +16,7 @@ def org():
 
 def test_list_org(org):
     assert len(org.list_org()) != 0
-    
 
-        # def get_org(self, id):
+def test_get_org(org):
+    org = os.environ.get('ORG')
+    assert len(org.get_org(org)) != 0

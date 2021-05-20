@@ -20,30 +20,11 @@ class Org():
     def get_org(self, name=None, org_id=None):
         """
         Parameters:
-        org_id (int): flowdock org id.
-
-        Get information about an organization using the parameterized name.
-        The authenticated user must belong to the organization.
-        """
-        resp = {}
-        if org_id:
-            qdata = self.Configuration.organizations.get('find_org')
-            qdata.update({'api':qdata['api'].format(id=org_id)})
-            resp self.ApiClient.client(qdata)
-        else:
-            qdata = self.Configuration.flow.get('get_org_name')
-            qdata.update({'api':qdata['api'].format(org=name)})
-            resp = self.ApiClient.client(qdata)
-        return resp
-
-    def get_flow(self, name=None, org_id=None):
-        """
-        Parameters:
         name (str):  parameterized_name of the org
         org_id (int): flowdock org id
 
-        Get a single flow.
-        Single flow information always includes the flow’s user list.
+        Get information about an organization using the parameterized name.
+        The authenticated user must belong to the organization.
         """
         resp = {}
         if org_id:

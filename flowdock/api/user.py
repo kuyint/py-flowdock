@@ -61,7 +61,7 @@ class User():
     def add_user_flow(self, flow, user_id):
         """
         Parameters:
-        flow (int): flowdock flow name
+        flow (str):  parameterized_name of the flow
         user_id (int): flowdock user id
 
         Add a user to a flow.
